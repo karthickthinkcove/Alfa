@@ -1,0 +1,14 @@
+<div class="breadcrumcontainer">
+    <ul class="breadcrumb" fxLayout="row" fxLayoutAlign="start center">
+      <li *ngFor="let breadcrumb of breadcrumbs; let last = last;let first = first;"
+          class="breadcrumb-item">
+        <a [routerLink]="[breadcrumb.url]"  [queryParams]="breadcrumb.params" [ngClass]="{'removeLInk':last || first}" [ngStyle]="{'color': last ? 'black':''}">
+          {{ breadcrumb.label }}
+        </a>
+        <!-- <span class="material-icons" *ngIf="!first&& !last">
+          navigate_next
+          </span> -->
+          <mat-icon *ngIf="!last">navigate_next</mat-icon>
+      </li>
+    </ul>
+  </div>

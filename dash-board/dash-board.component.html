@@ -1,0 +1,247 @@
+<div class="container">
+    <div fxLayout="row">
+        <div fxFlex>
+            <div fxLayout="row">
+                <mat-card class="example-card" fxFlex>
+                    <mat-card-header>
+                        <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <div fxFlex class="cardTitle">
+                                Total Expenses
+                            </div>   
+                            <div class="count">
+                                12 
+                            </div>
+                        </div>
+                    </mat-card-header>
+                </mat-card>
+                <mat-card class="example-card" fxFlex>
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex class="cardTitle">
+                            Total Orders
+                        </div>   
+                        <div class="count">
+                            12 
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card class="example-card" fxFlex>
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex class="cardTitle">
+                            Total Payments
+                        </div>   
+                        <div class="count">
+                            14
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+             <div  fxLayout="row wrap" class="subheader" fxLayoutAlign="start center">
+                     <div fxFlex> 
+                        <div  fxLayout="row wrap"  fxLayoutAlign="start center">
+                        Expenses Request 
+                        <span fxFlexOffset="20px"></span>
+                        <button mat-fab class="dashboardbtn"><mat-icon>add</mat-icon></button>
+                        </div>
+                    </div>
+                    <div [hidden]="expenseList.length>3">
+                        <button mat-button  style="color: #039be5 !important;" 
+                        (click)="viewMore()">View More   
+                        <span class="material-icons">arrow_forward</span></button>
+            
+                    </div>
+                </div>
+                <div  fxLayout="row wrap">           
+                    
+                        <div fxFlex.sm="90%" fxFlex.md="45%" fxFlex.lg="33%" fxFlex.xl="25%"
+                        *ngFor="let expense of expenseList ; let i = index">
+                            <div fxFlex="100%" style="margin:5px;">                       
+                                <div>
+                                    <mat-card  fxFlex class="matcard custommat-card">
+                                        <mat-card-content>
+                                            <div fxLayout="row" class="cardheader">
+                                                <div fxFlex="50">
+                                                    <h3>{{expense.expenseCategory}}</h3>
+                                                </div>
+                                                <div fxFlex fxLayoutAlign="end start">
+                                                    <button (click)="editExpense(expense)" mat-mini-fab  class="icon"
+                                                        aria-label="Example icon button with a home icon">
+                                                        <mat-icon class="text">edit</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex="1 1 50%">
+                                                    <div class="label">Travel Option</div>
+                                                    <div class="value">
+                                                        <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.type}}</mat-chip> </mat-chip-list>
+                                                    </div>
+                                                </div>
+                                                <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                                    <div class="label">Date & Day</div>
+                                                    <div class="value">
+                                                        <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.date}}</mat-chip> </mat-chip-list></div>
+                                                </div>
+                                                <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                                    <div class="label">Status</div>
+                                                    <div class="value"><mat-chip-list><mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);"> {{expense.status}}</mat-chip> </mat-chip-list></div>
+                                                </div>
+                                            </div>
+                                            &nbsp;
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex="1 2 50%">
+                                                    <div class="label">From & To</div>
+                                                    <div class="value address"> {{expense.journey}}</div>
+                                                </div>                                        
+                                            </div> 
+                                            &nbsp;
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex>
+                                                    <div class="label">Total Amount</div>
+                                                    <div class="value amount"> {{expense.travelAmount}}</div>
+                                                </div>  
+                                                <div fxLayout="column" fxFlexOffset="10px" fxFlex="30%">
+                                                    <button class="discardbtn" mat-raised-button>Discard</button>        
+                                                </div>                                      
+                                            </div>                                    
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+       
+        <div  fxLayout="row wrap" class="subheader" fxLayoutAlign="start center">
+            <div fxFlex> 
+               <div  fxLayout="row wrap"  fxLayoutAlign="start center">
+               Order list <span class="material-icons">add</span>
+               </div>
+           </div>
+           <div [hidden]="expenseList.length>3">
+               <button mat-button  (click)="viewMore()">View More<span class="material-icons">arrow_forward</span></button>
+   
+           </div>
+       </div>
+       <div  fxLayout="row wrap">           
+           
+               <div fxFlex.sm="90%" fxFlex.md="45%" fxFlex.lg="33%" fxFlex.xl="25%"
+               *ngFor="let expense of expenseList ; let i = index">
+                   <div fxFlex="100%" style="margin:5px;">                       
+                       <div>
+                           <mat-card  fxFlex class="matcard custommat-card">
+                               <mat-card-content>
+                                   <div fxLayout="row" class="cardheader">
+                                       <div fxFlex="50">
+                                           <h3>{{expense.expenseCategory}}</h3>
+                                       </div>
+                                       <div fxFlex fxLayoutAlign="end start">
+                                           <button (click)="editExpense(expense)" mat-mini-fab  class="icon"
+                                               aria-label="Example icon button with a home icon">
+                                               <mat-icon class="text">edit</mat-icon>
+                                           </button>
+                                       </div>
+                                   </div>
+                                   <div fxLayout="row">
+                                       <div fxLayout="column" fxFlex="1 1 50%">
+                                           <div class="label">Travel Option</div>
+                                           <div class="value">
+                                               <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.type}}</mat-chip> </mat-chip-list>
+                                           </div>
+                                       </div>
+                                       <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                           <div class="label">Date & Day</div>
+                                           <div class="value">
+                                               <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.date}}</mat-chip> </mat-chip-list></div>
+                                       </div>
+                                       <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                           <div class="label">Status</div>
+                                           <div class="value"><mat-chip-list><mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);"> {{expense.status}}</mat-chip> </mat-chip-list></div>
+                                       </div>
+                                   </div>
+                                   &nbsp;
+                                   <div fxLayout="row">
+                                       <div fxLayout="column" fxFlex="1 2 50%">
+                                           <div class="label">From & To</div>
+                                           <div class="value address"> {{expense.journey}}</div>
+                                       </div>                                        
+                                   </div> 
+                                   &nbsp;
+                                   <div fxLayout="row">
+                                       <div fxLayout="column" fxFlex>
+                                           <div class="label">Total Amount</div>
+                                           <div class="value amount"> {{expense.travelAmount}}</div>
+                                       </div>  
+                                       <div fxLayout="column" fxFlexOffset="10px" fxFlex="30%">
+                                           <button class="discardbtn" mat-raised-button>Discard</button>        
+                                       </div>                                      
+                                   </div>                                    
+                               </mat-card-content>
+                           </mat-card>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div fxFlex="290px"  fxLayout="column wrap">
+           
+                <div fxFlex
+                        *ngFor="let expense of expenseList ; let i = index">
+                            <div fxFlex="100%" style="margin:5px;">                       
+                                <div>
+                                    <mat-card  fxFlex class="matcard custommat-card">
+                                        <mat-card-content>
+                                            <div fxLayout="row" class="cardheader">
+                                                <div fxFlex="50">
+                                                    <h3>{{expense.expenseCategory}}</h3>
+                                                </div>
+                                                <div fxFlex fxLayoutAlign="end start">
+                                                    <button (click)="editExpense(expense)" mat-mini-fab  class="icon"
+                                                        aria-label="Example icon button with a home icon">
+                                                        <mat-icon class="text">edit</mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex="1 1 50%">
+                                                    <div class="label">Travel Option</div>
+                                                    <div class="value">
+                                                        <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.type}}</mat-chip> </mat-chip-list>
+                                                    </div>
+                                                </div>
+                                                <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                                    <div class="label">Date & Day</div>
+                                                    <div class="value">
+                                                        <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{expense.date}}</mat-chip> </mat-chip-list></div>
+                                                </div>
+                                                <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+                                                    <div class="label">Status</div>
+                                                    <div class="value"><mat-chip-list><mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);"> {{expense.status}}</mat-chip> </mat-chip-list></div>
+                                                </div>
+                                            </div>
+                                            &nbsp;
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex="1 2 50%">
+                                                    <div class="label">From & To</div>
+                                                    <div class="value address"> {{expense.journey}}</div>
+                                                </div>                                        
+                                            </div> 
+                                            &nbsp;
+                                            <div fxLayout="row">
+                                                <div fxLayout="column" fxFlex>
+                                                    <div class="label">Total Amount</div>
+                                                    <div class="value amount"> {{expense.travelAmount}}</div>
+                                                </div>  
+                                                <div fxLayout="column" fxFlexOffset="10px" fxFlex="30%">
+                                                    <button class="discardbtn" mat-raised-button>Discard</button>        
+                                                </div>                                      
+                                            </div>                                    
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
+           
+        </div>
+    </div>
+   
+</div>

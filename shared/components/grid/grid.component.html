@@ -1,0 +1,107 @@
+
+<div fxLayout="row">
+    <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+        <label class="value">Expenses Type</label>
+        <select [(ngModel)]="statusId" class="status">
+            <option *ngFor="let status of statusList" [value]="status.Id">{{status.name}}</option>
+        </select>
+    </div>
+    <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+
+    <label class="value">Month</label>
+   <select  class="month">
+      <option *ngFor="let month of months">{{month}}</option>
+    </select>
+    </div>
+    <div fxLayout="column" fxFlexOffset="15px" fxFlex="1 1 50%">
+
+    <label class="value">Year</label>
+
+    <select [(ngModel)]="selectedYear" class="year">
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option> 
+     </select>
+     </div>
+     </div>
+
+
+
+
+    <div>
+    <p-table #dt2 [value]="dataSource" [columns]="headers" [paginator]="true" [rows]="rows"
+        [showCurrentPageReport]="true" [(first)]="first" responsiveLayout="scroll"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10,25,50]" [globalFilterFields]="['name','position','salary','active']">
+        <ng-template pTemplate="caption" *ngIf="tblSearch">
+            <div class="p-d-flex">
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Search keyword" />
+                </span>
+                <span style="float: right">
+                    <a role="button" class="px-2 searchBtn" (click)="$event.stopPropagation()">
+                        <i class="pi pi-fw pi-sort-alt"></i>
+                    </a>
+                    <a role="button" class="px-2 searchBtn" (click)="menu.toggle($event)">
+                        <i class="fa fa-download fa-sm"></i>
+                    </a>
+                    <a role="button" class="px-2 searchBtn" (click)="$event.stopPropagation()">
+                        <i class="fa fa-plus fa-sm"></i>
+                    </a>
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [style]="col.style" pResizableColumn pReorderableColumn
+                    [pSortableColumn]="col.sortfield?col.field:''">
+                    <b>
+                        <span [pTooltip]="col.toolTip">
+                            {{col.header}}
+                        </span>
+                    </b>
+                    <p-sortIcon [field]="col.field" *ngIf="col.sortfield"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-columns="columns">
+            <tr>
+                <td *ngFor="let key of columns" [ngSwitch]="key.type" [style]="key.style">
+                    <span *ngSwitchCase="'actions'">
+                        <span *ngFor="let keys of key.rowActions" [ngSwitch]="keys">
+                            <a style="color: #939393;" role="button" class="px-2" (click)="rowActions(item,'view')"
+                                *ngSwitchCase="'view'">
+                                <i class="fa fa-eye fa-lg"></i>
+                            </a>
+                            <a style="color: #939393;" role="button" class="px-2" (click)="rowActions(item,'delete')"
+                                *ngSwitchCase="'delete'">
+                                <i class="fa fa-trash-alt fa-lg"></i>
+                            </a>
+                            <a style="color: #939393;" role="button" class="px-2" (click)="rowActions(item,'edit')"
+                                *ngSwitchCase="'edit'">
+                                <i class="fa fa-edit fa-lg"></i>
+                            </a>
+                        </span>
+                    </span>
+                    <span *ngSwitchCase="'currency'" [ngClass]="key.chip?'chip':''" [style.background]="key.color">
+                        {{item[key.field]| currency:'INR':true:'1.2-4'}}
+                    </span>
+                    <span *ngSwitchCase="'date'" [ngClass]="key.chip?'chip':''" [style.background]="key.color">
+                        {{item[key.field]| date:'dd/MM/yyyy'}}
+                    </span>
+                    <span *ngSwitchCase="'datetime'" [ngClass]="key.chip?'chip':''" [style.background]="key.color">
+                        {{item[key.field]| date:'dd/MM/yyyy HH:mm'}}
+                    </span>
+                    <span *ngSwitchCase="'boolean'">
+                        <span [ngClass]="key.class"> </span> {{item[key.field]}}
+                    </span>
+                    <span *ngSwitchDefault [ngClass]="key.chip?'chip':''" [style.background]="key.color">
+                        {{item[key.field]}}
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p-menu #menu [popup]="true" [model]="items"></p-menu>
+</div>

@@ -1,0 +1,100 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10">
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25">
+        <mat-label>Expenses Category</mat-label>
+        <input matInput [matAutocomplete]="auto" [(ngModel)]="expenses.category" placeholder="Select Expenses Category">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+            <mat-option *ngFor="let option of expenseConstants.expenseCategory" [value]="option.type">
+                {{option.value}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25" *ngIf="expenses.category==='travel'">
+        <mat-label>Travel Type</mat-label>
+        <input matInput [matAutocomplete]="autoType" [(ngModel)]="expenses.travelType" placeholder="Select Travel Type">
+        <mat-autocomplete #autoType="matAutocomplete">
+            <mat-option *ngFor="let option of expenseConstants.expenseTypes" [value]="option.value">
+                {{option.value}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10"  *ngIf="expenses.category">
+
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="expenses.enterDate" placeholder="Enter Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25" *ngIf="expenses.category==='travel' && expenses.travelType!=='Bus'">
+        <mat-label>Vehicle No.</mat-label>
+        <input matInput placeholder="Vehicle No" [(ngModel)]="expenses.vehicleNo" placeholder="Enter Vehicle Number">
+    </mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10"  *ngIf="expenses.category">
+
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25" *ngIf="expenses.category==='travel' && expenses.travelType!=='Bus'">
+        <mat-label>Opening km</mat-label>
+        <input matInput [(ngModel)]="expenses.openingKm" placeholder="Enter Opening km">
+    </mat-form-field>
+
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25" *ngIf="expenses.category==='travel' && expenses.travelType!=='Bus'">
+        <mat-label>Closing km</mat-label>
+        <input matInput [(ngModel)]="expenses.closingKm" placeholder="Enter Closing km">
+    </mat-form-field>
+
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25">
+        <mat-label>Travel Expenses.</mat-label>
+        <input matInput [(ngModel)]="expenses.expenseAmount" placeholder="Enter Travel Expenses">
+        <span matPrefix>Rs.&nbsp;</span>
+    </mat-form-field>
+
+</div>
+<div class="billattach"  *ngIf="expenses.category">
+    Bill Attachment
+</div>
+<div fxLayout="row" class="upload"  *ngIf="expenses.category">
+    <button mat-raised-button class="uploadbtn" (click)="fileInput.click()">
+        <mat-icon>cloud_upload</mat-icon> Upload File
+    </button>
+
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput multiple="true">
+
+    <div fxLayout="row" fxFlexOffset="2" *ngFor="let selected of expenses.billAttachment; let index = index">
+        <div class="value">
+            <mat-chip-list>
+                <mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);">{{selected.name}}
+                    <mat-icon (click)="removeSelectedFile(index)">close</mat-icon></mat-chip>
+                
+            </mat-chip-list>
+        </div>
+    </div>
+</div>
+&nbsp;
+<div fxLayout="row" style="margin-top:10px"  *ngIf="expenses.category">
+    
+    <mat-form-field class="customsearch" floatLabel="always" fxFlex="25">
+        <mat-label>Particulars of Journey</mat-label>
+        <input matInput [matAutocomplete]="autoJourney" placeholder="Search Locations" [(ngModel)]="journey">
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete #autoJourney="matAutocomplete" [displayWith]="displayFns" (optionSelected)="addLocations($event.option.value)">
+            <mat-option *ngFor="let option of expenseConstants.journeyLocations" [value]="option">
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+<div fxLayout="row" class="filtermatchip"  *ngIf="expenses.category">
+    <div fxLayout="row" fxFlexOffset="2" *ngFor="let selected of expenses.particularsJourney; let index = index">
+        <div class="value">
+            <mat-chip-list>
+                <mat-chip class="customchip">{{selected.name}}
+                    <mat-icon (click)="removeLocations(index)">close</mat-icon></mat-chip>                
+            </mat-chip-list>
+        </div>
+    </div>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="end center" fxLayoutGap="10" class="footeraction">
+    <button mat-raised-button (click)="cancelExpense()"> Cancel</button>
+    <button mat-raised-button color="primary" (click)="submit()"> Submit</button>
+</div>

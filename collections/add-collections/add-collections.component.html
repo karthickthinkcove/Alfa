@@ -1,0 +1,31 @@
+<div fxLayoutAlign="start center" fxLayout="row wrap">
+    <div fxFlex="35">
+        <mat-form-field floatLabel="never" class="customsearch">
+            <mat-label>Buyer Name</mat-label>
+            <input matInput name="buyerName">
+        </mat-form-field>
+    </div>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10">
+    <mat-form-field floatLabel="never" class="customsearch" fxFlex="25">
+        <mat-label>Status</mat-label>
+        <input matInput name="status">
+    </mat-form-field>
+    <mat-form-field floatLabel="never" class="customsearch" fxFlex="25">
+        <mat-label>Paid with</mat-label>
+        <input matInput [matAutocomplete]="auto" name="paid">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of paymentlst " [value]="option">
+                {{option.option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+<div fxLayout="row">
+    Payment Attachment
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="end center" fxLayoutGap="10">
+    <button mat-raised-button  (click)="cancelCollection()"> Cancel</button>
+    <button mat-raised-button color="primary"> Confirm</button>
+</div>

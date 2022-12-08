@@ -1,0 +1,77 @@
+<div>
+    <div fxLayoutAlign="start center" fxLayout="row wrap">
+        <mat-form-field floatLabel="never" class="customsearch">
+            <input type="search"  matInput name="searchName"
+            placeholder="Search Payments" maxlength="255">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div> 
+    <div fxLayout="row wrap">
+        <div fxFlex>           
+            <div fxLayout="row wrap">
+                <div fxFlex.sm="90%" fxFlex.md="45%" fxFlex.lg="33%" fxFlex.xl="25%"
+                *ngFor="let orders of ordersData; let i = index">
+                    <div fxFlex="100%" style="margin:5px;">                       
+                        <div>
+                            <mat-card  fxFlex class="matcard custommat-card">
+                                <mat-card-content>
+                                    <div fxLayout="row" class="cardheader">
+                                        <div fxFlex="50">
+                                            <h3>{{orders.buyerName}}</h3>
+                                        </div>
+                                        <div fxFlex fxLayoutAlign="end start">
+                                            <button mat-mini-fab  class="icon"
+                                                aria-label="Example icon button with a home icon">
+                                                <mat-icon class="text">visibility</mat-icon>
+                                            </button>
+                                            &nbsp;
+                                            <button mat-mini-fab  class="icon"
+                                                aria-label="Example icon button with a home icon">
+                                                <mat-icon class="text" (click)="editCollections()">edit</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="1 1 50%">
+                                            <div class="label">Dated</div>
+                                            <div class="value">
+                                                <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{orders.date }}</mat-chip> </mat-chip-list>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="1 1 50%">
+                                            <div class="label">Location</div>
+                                            <div class="value">
+                                                <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;">{{orders.location }}</mat-chip> </mat-chip-list> 
+                                                </div>
+                                        </div>
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="1 1 50%">
+                                            <div class="label">Status</div>
+                                            <div class="value"> <mat-chip-list><mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);"> {{orders.status}}</mat-chip> </mat-chip-list></div>
+                                        </div>
+                                    </div>
+                                    &nbsp;
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="1 2 50%">
+                                            <div class="label">Ordered Products</div>
+                                            <div class="value address"> {{orders.orderedProducts}}</div>
+                                        </div>                                        
+                                    </div> 
+                                    &nbsp;
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex>
+                                            <div class="label">Total Amount</div>
+                                            <div class="value amount"> Rs. {{orders.totalAmount}}</div>
+                                        </div>  
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="30%">
+                                            <button class="discardbtn" mat-raised-button>Discard</button>        
+                                        </div>                                      
+                                    </div>                                    
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+.mainmenu {
+    margin: 20px;
+    font-size: 11px;
+
+    ul {
+        list-style: none;
+        margin: 0px;
+        background: #fff;
+        min-height: 400px;
+        padding: 0px;
+        margin-top: 50px;
+        width: 80px;
+        border-radius: 27px;
+        position: relative;
+        box-shadow: 5px 10px 18px #dddddd70 !important;
+        position: fixed;
+        z-index: 1;
+        top: 100px;
+        left: 14px;
+        .logoutsection {
+            position: absolute;
+            bottom: 0px;
+            left: 0pc;
+            right: 0px;
+        }
+
+        li {
+            a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+                color: grey;
+            }
+
+            // .menuactive  .active {
+            //     color: #0b92d3 !important;
+            // }
+        }
+
+    }
+
+    a.menuactive.active {
+        color: #0b92d3 !important;
+    }
+
+}

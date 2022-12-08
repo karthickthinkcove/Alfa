@@ -1,0 +1,44 @@
+.breadcrumcontainer {
+
+    min-height: 36px;
+
+    margin-bottom: 30px;
+
+    ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        margin-bottom: -20px !important;
+        padding-left: 12px;
+        position: relative;
+        top: 10px;
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:first-child a {
+                padding-left: 0px !important;
+            }
+
+            a {
+                font-size: 14px;
+                padding: 5px;
+                color: #0b92d3 !important;
+                text-decoration: none;
+            }
+
+            .material-icons {
+                font-size: 23px;
+                margin-top: 1px;
+                color: #c2c2c2;
+            }
+
+            .removeLInk {
+                cursor: none;
+                pointer-events: none !important;
+            }
+        }
+    }
+}

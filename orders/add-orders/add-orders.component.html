@@ -1,0 +1,76 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10">
+    <mat-form-field floatLabel="always" class="customsearch" fxFlex="25">
+        <mat-label>Buyer Name</mat-label>
+        <input matInput [matAutocomplete]="auto"  [(ngModel)]="productLst.buyerName" placeholder="Enter Buyer Name">
+        <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of dealer " [value]="option.name">
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" class="customsearch" fxFlex="25">
+        <mat-label>Add Product</mat-label>
+        <input matInput [matAutocomplete]="auto1" [(ngModel)]="addProduct" placeholder="Search Product">
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete #auto1="matAutocomplete"  [displayWith]="displayFn" (optionSelected)='addProducts($event.option.value)'>
+            <mat-option *ngFor="let option of product" [value]="option" >
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
+<div fxLayout="row">
+    Added Products
+</div>
+<div>
+    <div fxLayout="row wrap" class="productmatcard" fxLayoutGap="10px" *ngFor="let t of temp(math.ceil(productLst.addedProducts.length/3)); let  i = index">
+    <mat-card fxFlex="330px" class="matcard custommat-card" *ngFor="let item of productLst.addedProducts.slice(3*i,3*i + 3)">
+        <div fxLayout="row">
+            <div class="imagesection">
+                <img src="../../../assets/download.jpg" width="35px" height="35px">
+            </div>
+            <div fxFlex>
+                <div fxLayout="row" class="productname">
+                {{item.name?item.name+" ":item.name}} {{item.description}}
+                </div>
+                <div fxLayout="row" class="priceamount">
+                   {{item.amount | currency:'INR'}}
+                </div>
+            </div>
+            <div>
+                <mat-icon>close</mat-icon>
+            </div>
+        </div>
+        <div fxLayout="row" class="productdetail">
+                <div >
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-fab (click)="reduceCount(item)" [disabled]="item.quantity===1"><mat-icon>remove</mat-icon></button>
+                        <div class="count">
+                         {{item.quantity}}
+                        </div>
+                        <button mat-fab (click)="addCount(item)"><mat-icon>add</mat-icon></button>
+                        </div>
+                </div>
+           
+            <div fxFlex>
+                <div >
+                    <div fxLayout="row" fxLayoutAlign="end center">Amount</div>
+                    <div fxLayout="row" fxLayoutAlign="end center" class="rightcount">{{item.totalAmount  | currency:'INR'}}</div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>
+</div>
+<div fxLayout="row" class="footeraction">
+    <div fxFlex fxLayoutAlign="start center">
+        <mat-label>Total Amount: </mat-label>
+        <mat-label>{{calTotal() | currency:'INR'}}</mat-label>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="end center" fxLayoutGap="10">
+        <button mat-raised-button (click)="cancelOrders()"> Cancel</button>
+        <button mat-raised-button color="primary" (click)="submit()"> Confirm</button>
+    </div>
+
+</div>

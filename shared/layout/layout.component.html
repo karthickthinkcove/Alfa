@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="header">
+    <app-header [title]="title"></app-header>
+    
+  </div>
+  <div class="content">
+    <div fxLayout="row">
+      <app-side-menu></app-side-menu>
+      <div fxFlex fxFlexOffset="70px">
+        <app-breadcrumb></app-breadcrumb>
+        <router-outlet (activate)="setHeader()"></router-outlet>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <!-- <app-footer></app-footer> -->
+  </div>
+</div>

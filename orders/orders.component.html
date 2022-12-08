@@ -1,0 +1,82 @@
+<div>
+    <div fxLayoutAlign="start center" fxLayout="row wrap"  style="padding-right:20px">
+        <mat-form-field floatLabel="never" class="customsearch defaultinput">
+            <input type="search"  matInput name="searchName"
+            placeholder="Search Orders" maxlength="255">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <div fxFlex>
+            <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-raised-button style="background-color:#1e88e5;color: white;border-radius: 15px !important;" (click)="approved()">Approved Order</button>
+            </div>
+        </div>
+        <div fxFlex>
+            <div fxLayout="row" fxLayoutAlign="end center">
+                <button mat-raised-button style="background-color:#1e88e5;color: white;border-radius: 15px !important;" (click)="addOrders()">+ Add Orders</button>
+            </div>
+        </div>
+    </div> 
+    <div fxLayout="row wrap">
+        <div fxFlex>           
+            <div fxLayout="row wrap">
+                <div fxFlex.sm="90%" fxFlex.md="45%" fxFlex.lg="33%" fxFlex.xl="25%"
+                *ngFor="let orders of ordersData; let i = index">
+                    <div fxFlex="100%" style="margin:5px;">                       
+                        <div>
+                            <mat-card  fxFlex class="matcard custommat-card">
+                                <mat-card-content>
+                                    <div fxLayout="row" class="cardheader">
+                                        <div fxFlex="50">
+                                            <h3>{{orders.buyerName}}</h3>
+                                        </div>
+                                        <div fxFlex fxLayoutAlign="end start">
+                                            <button (click)="editOrders(orders)" mat-mini-fab  class="icon"
+                                                aria-label="Example icon button with a home icon">
+                                                <mat-icon class="text">edit</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="1 1 50%">
+                                            <div class="label">Dated</div>
+                                            <div class="value">
+                                                 <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;"> {{orders.createdate|date:'MM/dd/YYYY' }}</mat-chip> </mat-chip-list>
+                                               </div>
+                                        </div>
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="1 1 50%">
+                                            <div class="label">Location</div>
+                                            <div class="value">
+                                                <mat-chip-list><mat-chip class="customchip" style="background-color:#e3f2fd;color: #1e88e5;"> {{orders.location?orders.location:'Madurai' }}</mat-chip> </mat-chip-list> 
+                                            </div>
+                                        </div>
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="1 1 50%">
+                                            <div class="label">Status</div>
+                                            <div class="value"><mat-chip-list><mat-chip class="customchip" style="background-color:rgb(255, 205, 186);color: rgb(243, 127, 81);"> {{orders.status?orders.status:'Pending'}}</mat-chip> </mat-chip-list> </div>
+                                        </div>
+                                    </div>
+                                    &nbsp;
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="1 2 50%">
+                                            <div class="label">Ordered Products</div>
+                                            <div class="value address" *ngFor="let item of orders.addedProducts"> {{' '+item.name}}</div>
+                                        </div>                                        
+                                    </div> 
+                                    &nbsp;
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex>
+                                            <div class="label">Total Amount</div>
+                                            <div class="value amount"> Rs. {{getSum(orders.addedProducts) }}</div>
+                                        </div>  
+                                        <div fxLayout="column" fxFlexOffset="10px" fxFlex="30%">
+                                            <button class="discardbtn" mat-raised-button>Discard</button>        
+                                        </div>                                      
+                                    </div>                                    
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

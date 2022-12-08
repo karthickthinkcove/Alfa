@@ -1,0 +1,73 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="height:100% ;">
+        <mat-card class="login-card">
+            <mat-card-header>
+                <!-- <mat-card-title>Alfa</mat-card-title>
+                <mat-card-subtitle>Bio Corporation</mat-card-subtitle> -->
+            </mat-card-header>
+            <mat-card-content>
+                <div class="container">
+                    <ng-container *ngIf="!otpSent; else otpContainer">
+                        <div fxLayout="row">
+                            <h2>Login</h2>
+                        </div>
+                        <div fxLayout="row">
+                            <h3 class="phonenumber">Phone Number</h3>
+                        </div>
+                        <div  fxLayout="row" fxLayoutAlign="start center" style="position: relative">
+                            <mat-form-field fxFlex >
+                                <div matPrefix>
+                                    <div class="imagesection">
+                                        <img src="../../assets/indiaflag.jpg" width="26px" height="26px">
+                                        <span class="material-symbols-outlined">
+                                            arrow_drop_down
+                                            </span>
+                                    </div>
+                                </div>
+                                <input matInput type="tel"  [(ngModel)]="phoneNumber" placeholder="Enter number">
+                            </mat-form-field>
+                        </div>
+                        <div class="sec-container">
+                                <mat-card-subtitle class="subtitle">A 4 digit OTP will be sent via SMS to verify your <br> mobile number!</mat-card-subtitle>
+                        </div>
+                        <button mat-raised-button color="primary" class="otpbtn"  
+                        (click)="getOtp()">Get
+                           OTP</button>
+                           <div id="recaptcha-container"></div>
+                    </ng-container>
+
+                    <ng-template #otpContainer>
+
+                        <div class="sec-container">
+                            <div fxLayout="row">
+                                <h2>OTP Verification</h2>
+                            </div>
+                            <div fxLayout="row">
+                                <h3 class="phonenumber">Enter the OTP you received to </h3>
+                            </div>
+                            <div fxLayout="row">
+                            <span>+91- {{phoneNumber}}</span>
+                            </div>
+                            <div fxLayout="row">
+                                <div *ngFor="let item of formInput;  index as i">
+                                    <mat-form-field class="example-form-field" appearance="fill">
+                        
+                                        <input  #formRow matInput maxlength="1" [(ngModel)]="item.name" (keyup)="keyUpEvent($event, i)">
+                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button color="primary" class="otpbtn"  
+                            (click)="otpverify()">Continue</button>
+                           
+                        </div>
+                    </ng-template>
+
+                    <div id="sign-in-button"></div>
+
+                </div>
+            </mat-card-content>
+           
+               
+            
+        </mat-card>
+</div>

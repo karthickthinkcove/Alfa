@@ -1,0 +1,23 @@
+<div class="mainmenu">
+  <ul fxLayout="column">
+    <li *ngFor="let item of menuList">
+      <a class="menuactive" [routerLink]="item.route" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" style="text-decoration: none;">
+        <span class="material-symbols-outlined">
+          {{item.icon}}
+        </span>
+        <span class="menulabel"> {{item.name}}</span>
+      </a>
+    </li>
+    <div class="logoutsection">
+      <li>
+        <a>
+          <span class="material-symbols-outlined" (click)="logOut()" style="cursor: pointer;">
+            logout
+          </span>
+          <span class="menulabel">logout</span>
+        </a>
+      </li>
+    </div>
+  </ul>
+</div>

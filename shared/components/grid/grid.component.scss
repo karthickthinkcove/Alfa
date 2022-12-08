@@ -1,0 +1,51 @@
+.month{
+    box-sizing: border-box;
+
+width: 200px;
+height: 48px;
+background: #FFFFFF;
+border: 1px solid #E9ECEF;
+border-radius: 40px;
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+.year{
+    box-sizing: border-box;
+
+width: 200px;
+height: 48px;
+background: #FFFFFF;
+border: 1px solid #E9ECEF;
+border-radius: 40px;
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+.status{
+    box-sizing: border-box;
+width: 320px;
+    height: 48px;
+     background: #FFFFFF;
+   border: 1px solid #E9ECEF;
+    border-radius: 40px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+.value{
+    width: 78px;
+height: 20px;
+
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 20px;
+color: #6C757D;
+flex: none;
+order: 0;
+flex-grow: 0;
+margin-left: 15px;
+}
